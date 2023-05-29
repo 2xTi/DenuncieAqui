@@ -1,0 +1,209 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Container preto no topo -->
+    <LinearLayout
+        android:id="@+id/top_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#1C2120"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:layout_gravity="center"
+            android:text="Denuncie Aqui" />
+
+        <!-- Conteúdo do container preto no topo -->
+        <!-- Adicione os elementos desejados aqui -->
+
+    </LinearLayout>
+
+    <!-- Container cinza central -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_above="@+id/footer"
+        android:layout_below="@+id/top_container"
+        android:background="#1C2120"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:layout_weight="1">
+
+        <!-- Conteúdo do container branco central -->
+        <!-- Adicione os elementos desejados aqui -->
+
+        <!-- Principal container cinza -->
+
+        <!-- Primeiro container cinza -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@drawable/edittext_border"
+            android:orientation="vertical">
+
+            <!-- Conteúdo do primeiro container cinza -->
+            <!-- Adicione os elementos desejados aqui -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:layout_margin="10dp"
+                android:text="Bem vindo"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textInfo"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp" />
+
+            <TextView
+                android:id="@+id/textInfoEmail"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/containerDenuncia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="20dp"
+            android:background="@drawable/edittext_border"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/denunciaicon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="75dp"
+                    android:layout_margin="15dp"
+                    android:gravity="center"
+                    android:textSize="30sp"
+                    android:textColor="@color/black"
+                    android:text="Denúncia anônima" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <!-- Segundo container cinza -->
+        <LinearLayout
+            android:id="@+id/containerAcompanhamento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="20dp"
+            android:background="@drawable/edittext_border"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/calendaricon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="75dp"
+                    android:layout_margin="15dp"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:text="Acompanhamento da Denúncia" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Terceiro container cinza -->
+        <LinearLayout
+            android:id="@+id/containerSuporte"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="20dp"
+            android:background="@drawable/edittext_border"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/supicon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="75dp"
+                    android:layout_margin="15dp"
+                    android:gravity="center"
+                    android:textSize="30sp"
+                    android:textColor="@color/black"
+                    android:text="Canal de Suporte" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Container preto no rodapé -->
+    <LinearLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#1C2120"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <!-- Conteúdo do container preto no rodapé -->
+        <!-- Adicione os elementos desejados aqui -->
+
+        <ImageView
+            android:id="@+id/imageview_home"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:src="@drawable/homeicon" />
+
+        <Space
+            android:layout_width="2dp"
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:id="@+id/imageview_gear"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:src="@drawable/gearicon" />
+
+    </LinearLayout>
+
+</RelativeLayout>

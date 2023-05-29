@@ -1,0 +1,141 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Container preto no topo -->
+    <LinearLayout
+        android:id="@+id/top_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#1C2120"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:layout_gravity="center"
+            android:text="Denuncie Aqui" />
+
+        <!-- Conteúdo do container preto no topo -->
+        <!-- Adicione os elementos desejados aqui -->
+
+    </LinearLayout>
+
+    <!-- Container cinza central -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_above="@+id/footer"
+        android:layout_below="@+id/top_container"
+        android:background="#1C2120"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:layout_weight="1">
+
+        <!-- Principal container cinza -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="20dp"
+            android:background="@drawable/edittext_border">
+
+            <!-- Conteúdo do primeiro container cinza -->
+            <!-- Adicione os elementos desejados aqui -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="75dp"
+                android:layout_margin="15dp"
+                android:gravity="center"
+                android:textSize="30sp"
+                android:textColor="@android:color/black"
+                android:text="Canal de Suporte" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:layout_gravity="center"
+            android:text="No que podemos ajudar ?" />
+
+        <!-- Segundo container cinza -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="20dp"
+            android:background="@drawable/edittext_border"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="#1C2120"
+                android:gravity="center">
+
+                <Spinner
+                    android:id="@+id/selectOptions"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:textColor="#FFFFFF"
+                    android:popupBackground="#1C2120" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/buttonEnviar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="#E02326"
+            android:text="ENVIAR" />
+
+    </LinearLayout>
+
+    <!-- Container preto no rodapé -->
+    <LinearLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#1C2120"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <!-- Conteúdo do container preto no rodapé -->
+        <!-- Adicione os elementos desejados aqui -->
+
+        <ImageView
+            android:id="@+id/imageview_home"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:src="@drawable/homeicon" />
+
+        <Space
+            android:layout_width="2dp"
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:id="@+id/imageview_gear"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:src="@drawable/gearicon" />
+
+    </LinearLayout>
+
+</RelativeLayout>
