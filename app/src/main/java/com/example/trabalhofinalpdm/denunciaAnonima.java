@@ -83,7 +83,7 @@ public class denunciaAnonima extends AppCompatActivity {
                 .collection("denuncias")
                 .document();
         //certo agora
-
+//certo agora
         // Crie um mapa com os dados da denúncia
         Map<String, Object> denunciaData = new HashMap<>();
         denunciaData.put("denuncia", denuncia);
