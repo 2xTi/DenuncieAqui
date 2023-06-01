@@ -21,12 +21,14 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class canalSuporte extends AppCompatActivity {
 
-
     private String userID; // Declaração da variável userID
+    private String selectedOption; // Variável para armazenar a opção selecionada
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,6 @@ public class canalSuporte extends AppCompatActivity {
         imageViewHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Ação a ser executada quando a ImageView for clicada, por exemplo:
                 Intent intent = new Intent(canalSuporte.this, telaInicial.class);
                 startActivity(intent);
             }
@@ -47,7 +48,6 @@ public class canalSuporte extends AppCompatActivity {
         imageViewGear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Ação a ser executada quando a ImageView for clicada, por exemplo:
                 Intent intent = new Intent(canalSuporte.this, Config.class);
                 startActivity(intent);
             }
@@ -55,7 +55,7 @@ public class canalSuporte extends AppCompatActivity {
 
         Spinner spinnerOptions = findViewById(R.id.selectOptions);
 
-        String[] options = {"Opção 1", "Opção 2", "Opção 3", "Opção 4", "Opção 5"};
+        String[] options = {"Problemas técnicos", "Dúvidas sobre recursos", "Conta e login", "Feedback", "Outro"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, options);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerOptions.setAdapter(adapter);
@@ -63,13 +63,11 @@ public class canalSuporte extends AppCompatActivity {
         spinnerOptions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedOption = parent.getItemAtPosition(position).toString();
-                // Ação a ser executada quando uma opção for selecionada no Spinner
+                selectedOption = parent.getItemAtPosition(position).toString();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                // Ação a ser executada quando nenhuma opção for selecionada no Spinner
             }
         });
 
@@ -77,55 +75,50 @@ public class canalSuporte extends AppCompatActivity {
         buttonEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String selectedOption = spinnerOptions.getSelectedItem().toString();
-
-                // Obter a referência do documento do usuário
-                DocumentReference userRef = firebaseFirestore.collection("usuarios").document(userID);
-
-                // Criar uma subcoleção chamada "suporte" dentro do documento do usuário
-                CollectionReference suporteRef = userRef.collection("suporte");
-
-                // Criar um novo documento na subcoleção "suporte"
-                suporteRef.add(new SupportOption(selectedOption))
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                // Ação a ser executada quando a opção é salva com sucesso
-                                Toast.makeText(canalSuporte.this, "Opção enviada com sucesso!", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                // Ação a ser executada em caso de falha no envio da opção
-                                Toast.makeText(canalSuporte.this, "Falha ao enviar a opção. Tente novamente.", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                enviarOpcaoSuporte();
             }
         });
     }
 
-    public class SupportOption {
-        private String option;
+    private void enviarOpcaoSuporte() {
+        userID = getCurrentUserID();
 
-        public SupportOption() {
-            // Construtor vazio necessário para o Firebase Firestore
+        // Verifique se o usuário está autenticado
+        if (userID == null) {
+            Toast.makeText(this, "Usuário não autenticado", Toast.LENGTH_SHORT).show();
+            return;
         }
 
-        public SupportOption(String option) {
-            this.option = option;
-        }
+        // Obtenha a referência do documento do usuário
+        DocumentReference userRef = firebaseFirestore.collection("usuarios").document(userID);
 
-        public String getOption() {
-            return option;
-        }
+        // Crie uma subcoleção chamada "suporte" dentro do documento do usuário
+        CollectionReference suporteRef = userRef.collection("suporte");
 
-        public void setOption(String option) {
-            this.option = option;
-        }
+        // Crie um novo documento na subcoleção "suporte" com a opção selecionada
+        Map<String, Object> supportData = new HashMap<>();
+        supportData.put("option", selectedOption);
+
+        suporteRef.add(supportData)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Toast.makeText(canalSuporte.this, "Opção enviada com sucesso!", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(canalSuporte.this, "Falha ao enviar a opção. Tente novamente.", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
+    private String getCurrentUserID() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            return currentUser.getUid();
+        }
+        return null;
+    }
 }
-
-
-
