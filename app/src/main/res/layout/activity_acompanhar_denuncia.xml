@@ -69,13 +69,14 @@
                 android:gravity="center">
 
                 <TextView
+                    android:id="@+id/textViewDenuncias"
                     android:layout_width="wrap_content"
                     android:layout_height="75dp"
                     android:layout_margin="15dp"
                     android:gravity="center"
                     android:textSize="15sp"
                     android:textColor="@android:color/black"
-                    android:text="Sua denúncia está sendo analisada por nossa equipe" />
+                    android:text="" />
 
             </LinearLayout>
 
