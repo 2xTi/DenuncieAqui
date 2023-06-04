@@ -115,7 +115,7 @@ public class denunciaAnonima extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         Toast.makeText(denunciaAnonima.this, "Denúncia enviada com sucesso", Toast.LENGTH_SHORT).show();
                         excluirDenunciaLocal(userID, denuncia);
-                        finish(); // Feche a tela de denúncia após o envio
+                        limparCampos();
                     } else {
                         Toast.makeText(denunciaAnonima.this, "Falha ao enviar a denúncia", Toast.LENGTH_SHORT).show();
                     }
@@ -138,7 +138,7 @@ public class denunciaAnonima extends AppCompatActivity {
         } else {
             // A denúncia foi salva com sucesso no banco de dados local
             Toast.makeText(this, "Denúncia salva localmente", Toast.LENGTH_SHORT).show();
-            finish();
+            limparCampos();
         }
     }
 
@@ -212,5 +212,12 @@ public class denunciaAnonima extends AppCompatActivity {
         if (database != null) {
             database.close();
         }
+    }
+
+    private void limparCampos() {
+        // Limpe os campos de entrada de texto ou qualquer outro campo que você precise limpar
+        // Por exemplo:
+        editTextDenuncia.setText("");
+        checkboxIdentify.setChecked(false);
     }
 }
