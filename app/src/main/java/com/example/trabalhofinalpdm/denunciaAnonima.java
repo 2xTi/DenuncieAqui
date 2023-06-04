@@ -114,6 +114,7 @@ public class denunciaAnonima extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Toast.makeText(denunciaAnonima.this, "Denúncia enviada com sucesso", Toast.LENGTH_SHORT).show();
+                        excluirDenunciaLocal(userID, denuncia);
                         finish(); // Feche a tela de denúncia após o envio
                     } else {
                         Toast.makeText(denunciaAnonima.this, "Falha ao enviar a denúncia", Toast.LENGTH_SHORT).show();
