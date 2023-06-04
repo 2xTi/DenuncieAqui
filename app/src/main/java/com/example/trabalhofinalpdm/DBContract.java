@@ -5,7 +5,7 @@ public final class DBContract {
     private DBContract() {}
 
         public static class DenunciaEntry {
-            public static final String TABLE_NAME = "denuncias";
+            public static final String TABLE_NAME = "denuncias_local";
             public static final String COLUMN_ID = "_id";
             public static final String COLUMN_USER_ID = "user_id";
             public static final String COLUMN_DENUNCIA = "denuncia";

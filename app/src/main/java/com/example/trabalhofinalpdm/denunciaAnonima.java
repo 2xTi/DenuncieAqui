@@ -49,6 +49,8 @@ public class denunciaAnonima extends AppCompatActivity {
         dbHelper = new DBHelper(this);
         database = dbHelper.getWritableDatabase();
 
+        verificarDenunciasLocais();
+
         buttonEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,6 +124,7 @@ public class denunciaAnonima extends AppCompatActivity {
     private void salvarDenunciaLocal(String userID, boolean identify, String denuncia) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
+        values.put(DBContract.DenunciaEntry.COLUMN_USER_ID, userID);
         values.put(DBContract.DenunciaEntry.COLUMN_IDENTIFY, identify ? 1 : 0);
         values.put(DBContract.DenunciaEntry.COLUMN_DENUNCIA, denuncia);
 
@@ -143,6 +146,7 @@ public class denunciaAnonima extends AppCompatActivity {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         String[] projection = {
+                DBContract.DenunciaEntry.COLUMN_USER_ID,
                 DBContract.DenunciaEntry.COLUMN_DENUNCIA,
                 DBContract.DenunciaEntry.COLUMN_IDENTIFY
         };
@@ -157,6 +161,11 @@ public class denunciaAnonima extends AppCompatActivity {
                 null
         );
 
+        if (cursor.getCount() > 0) {
+            // Existem denúncias salvas localmente
+            Toast.makeText(this, "Existem denúncias salvas localmente", Toast.LENGTH_SHORT).show();
+        }
+
         while (cursor.moveToNext()) {
             String userID = cursor.getString(cursor.getColumnIndexOrThrow(DBContract.DenunciaEntry.COLUMN_USER_ID));
             String denuncia = cursor.getString(cursor.getColumnIndexOrThrow(DBContract.DenunciaEntry.COLUMN_DENUNCIA));
@@ -167,7 +176,10 @@ public class denunciaAnonima extends AppCompatActivity {
         }
 
         cursor.close();
+        db.close(); // Feche o banco de dados após a consulta
     }
+
+
 
     private void excluirDenunciaLocal(String userID, String denuncia) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
